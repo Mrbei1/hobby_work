@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>storehouse</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="../plugin/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugin/icon/iconfont.css">
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="../plugin/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+<div id="index-box">
+    <!--菜单------ start -->
+    <div class="menu-nav">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="menuDiv" role="navigation">
+                    <ul class="nav nav-list nav-first">
+                        <li><a href="index.html"><span class=" iconfont icon-cangku" aria-hidden="true"></span><span>仓库查询</span></a></li>
+                        <li><a href="Inlog.html"><span class=" iconfont icon-chuli" aria-hidden="true"></span><span>入库记录</span></a></li>
+                        <li><a href="Outlog.html"><span class=" iconfont icon-chuli" aria-hidden="true"></span><span>出库记录</span></a></li>
+                        <li><a href="login.html"><span class="iconfont icon-tuichudenglu1" aria-hidden="true"></span><span>退出登录</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--菜单------ end -->
+
+    <!--右侧，展示主页    start-->
+    <div id="container-box" class="container">
+        <div class="index-main">
+            <div style="overflow: hidden;margin-top:15px;">
+                <h3 style="font-size:18px;font-family:inherit;font-weight:500;color:#6f7b8a">列表</h3>
+            </div>
+            <table class="table table-bordered table-striped  table-flip-scroll cf text-center" style="border-top:1px solid #ddd">
+                <thead class="cf">
+                <tr>
+                    <th class="text-center">创建时间</th>
+                    <th class="text-center">单号</th>
+                    <th class="text-center">入库日期</th>
+                    <th class="text-center">备注</th>
+                    <th class="text-center">操作人</th>
+                    <th class="text-center">订单状态</th>
+                    <th class="text-center">每小时价格/元</th>
+                    <th class="text-center">货物描述</th>
+                    <th class="text-center">仓库名称</th>
+                    <th class="text-center">货物数量</th>
+                    <th class="text-center">货物类型</th>
+                </tr>
+                </thead>
+                <tbody class="showList">
+                <!--<tr>-->
+                <!--<td>ALERT</td>-->
+                <!--<td>Marksdbfasbfhsla</td>-->
+                <!--<td>Marksdbfasbfhsla</td>-->
+                <!--<td>Otto</td>-->
+                <!--<td>Marksdbfasbfhsla</td>-->
+                <!--</tr>-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--右侧，展示主页    end-->
+</div>
+
+
+
+
+
+<script src="../plugin/jquery/jquery.min.js"></script>
+
+<script type="text/javascript" src="../plugin/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+<script>
+    $(function(){
+        var search = {
+            init:function(){
+                this.getEnrollmentRecordList();
+            },
+            getEnrollmentRecordList:function(){
+                $.ajax({
+                    url:'http://39.105.124.108:9999/getInWareOrderList',
+                    type:"GET",
+                    success:function (resp) {
+                        console.log(resp.content);
+                        var html = '';
+                        for(var i=0;i<resp.content.length;i++){
+                            html += '<tr>\n' +
+                                '<td>'+format(resp.content[i].createTime)+'</td>\n' +
+                                '<td>'+resp.content[i].inOrderNum+'</td>\n' +
+                                '<td>'+format(resp.content[i].inWareHouseDate)+'</td>\n' +
+                                '<td>'+fillterNull(resp.content[i].note)+'</td>\n' +
+                                '<td>'+resp.content[i].operator+'</td>\n' +
+                                '<td>'+status(resp.content[i].orderStatus)+'</td>\n' +
+                                '<td>'+resp.content[i].pricePerHour+'</td>\n' +
+                                '<td>'+resp.content[i].wareDesc+'</td>\n' +
+                                '<td>'+resp.content[i].wareHouseName+'</td>\n' +
+                                '<td>'+fillterNull(resp.content[i].wareQuantity)+'</td>\n' +
+                                '<td>'+resp.content[i].wareType+'</td>'
+                            '</tr>'
+                        }
+                        $('.showList').append(html);
+                    }
+                })
+                function status(n){
+                    if(n==1){
+                        return '使用中';
+                    }else{
+                        return '空闲';
+                    }
+                }
+                //过滤null
+                function fillterNull(n){
+                    if(n){
+                        return n;
+                    }else{
+                        return ''
+                    }
+                }
+                function format(shijianchuo){
+                    function add0(m){return m<10?'0'+m:m }
+                    //shijianchuo是整数，否则要parseInt转换
+                    var time = new Date(shijianchuo);
+                    var y = time.getFullYear();
+                    var m = time.getMonth()+1;
+                    var d = time.getDate();
+                    var h = time.getHours();
+                    var mm = time.getMinutes();
+                    var s = time.getSeconds();
+                    return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);
+                }
+            }
+        }
+        search.init();
+    })
+</script>
+</body>
+
+</html>

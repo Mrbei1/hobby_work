@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>search</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="../plugin/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugin/icon/iconfont.css">
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="../plugin/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+<div id="index-box">
+    <!--菜单------ start -->
+    <div class="menu-nav">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="menuDiv" role="navigation">
+                    <ul class="nav nav-list nav-first">
+                        <li><a href="index.html"><span class=" iconfont icon-cangku" aria-hidden="true"></span><span>仓库查询</span></a></li>
+                        <li><a href="Inlog.html"><span class=" iconfont icon-chuli" aria-hidden="true"></span><span>入库记录</span></a></li>
+                        <li><a href="Outlog.html"><span class=" iconfont icon-chuli" aria-hidden="true"></span><span>出库记录</span></a></li>
+                        <li><a href="login.html"><span class="iconfont icon-tuichudenglu1" aria-hidden="true"></span><span>退出登录</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--菜单------ end -->
+
+    <!--右侧，展示主页    start-->
+    <div id="container-box" class="container">
+        <div class="index-main">
+            <div style="overflow: hidden;border-bottom: 1px solid #dddddd">
+                <h3 style="font-size:14px;font-family:inherit;font-weight:500;color:#6f7b8a">出库结算</h3>
+            </div>
+
+            <div class="table-responsive row">
+                <div class="showList">
+                    <!--<div class="col-lg-3" style="padding:20px;">创建时间 ：仓库1</div>-->
+                    <!--<div class="col-lg-3" style="padding:20px;">单号：仓库1</div>-->
+                    <!--<div class="col-lg-3" style="padding:20px;">入库日期：仓库1</div>-->
+                    <!--<div class="col-lg-3" style="padding:20px;">货物描述：仓库1</div>-->
+                    <!--<div class="col-lg-3" style="padding:20px;">操作人：小池一狼</div>-->
+                    <!--<div class="col-lg-3" style="padding:20px;">货物类型：大货</div>-->
+                    <!--<div class="col-lg-3" style="padding:20px;">货物数量：大货</div>-->
+                    <!--<div class="col-lg-3" style="padding:20px;">每小时价格：1小时</div>-->
+                    <!--<div class="col-lg-3" style="padding:20px;">备注：仓库1</div>-->
+                </div>
+                <div class="col-lg-12" style="padding:20px;border-top: 1px solid #f1f1f1;">
+                    <div class="col-lg-9" style="padding:20px;"></div>
+                    <div class="col-lg-2 text-right" style="padding:20px;">付费：<strong id="nowTime" style="color:red;font-size:22px;">100¥</strong></div>
+                    <div class="col-lg-1 text-right" style="padding:20px;">
+                        <a href="javascript:;" type="button" class="btn btn-danger btn-small m-r-10" id="okOut">确定</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--右侧，展示主页    end-->
+</div>
+
+
+
+
+
+<script src="../plugin/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../plugin/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script>
+    $(function () {
+        var schoolList ={
+            init:function(){
+                this.getUniversityDetail();
+            },
+            getUniversityDetail:function(){
+                var nowTime = new Date().getTime();
+                var _this = this;
+                //var id = localStorage.getItem('wareHouseId');
+                var parm = {
+                    wareShelfBoxId:localStorage.getItem('outstockId')
+                }
+                $.ajax({
+                    url:'http://39.105.124.108:9999/getInWareOrderByBoxId',
+                    type:'GET',
+                    data:parm,
+                    success:function(resp){
+                        console.log(resp)
+                        var html = '<div class="col-lg-3" style="padding:20px;">创建时间 ：'+resp.content.createTime+'</div>\n' +
+                            '                    <div class="col-lg-3" style="padding:20px;">单号：'+resp.content.inOrderNum+'</div>\n' +
+                            '                    <div class="col-lg-3" style="padding:20px;">入库日期：'+resp.content.inWareHouseDate+'</div>\n' +
+                            '                    <div class="col-lg-3" style="padding:20px;">货物描述：'+resp.content.wareDesc+'</div>\n' +
+                            '                    <div class="col-lg-3" style="padding:20px;">操作人：'+resp.content.operator+'</div>\n' +
+                            '                    <div class="col-lg-3" style="padding:20px;">货物类型：'+resp.content.wareType+'</div>\n' +
+                            '                    <div class="col-lg-3" style="padding:20px;">货物数量：'+resp.content.wareQuantity+'</div>\n' +
+                            '                    <div class="col-lg-3" style="padding:20px;">每小时价格：'+resp.content.pricePerHour+'元</div>\n'+
+                            '                    <div class="col-lg-3" style="padding:20px;">备注：'+resp.content.note+'</div>'
+                        $('.showList').append(html);
+                        //过滤null
+                        function fillterNull(n){
+                            if(n){
+                                return n;
+                            }else{
+                                return ''
+                            }
+                        }
+                        var money = (Number(resp.content.pricePerHour*(nowTime-resp.content.inWareHouseDate)/1000/60/60)).toFixed(2);
+                        $('#nowTime').text(money+'¥')
+                        _this.okOutstoc(resp.content.operator,resp.content.note);
+                    }
+                })
+            },
+            okOutstoc:function(operator,note){
+                $('#okOut').click(function () {
+                    var parm2 = {
+                        wareShelfBoxId:localStorage.getItem('outstockId'),
+                        operator:operator,
+                        note:note
+                    }
+                    $.ajax({
+                        url:'http://39.105.124.108:9999/outWare',
+                        type:'POST',
+                        data:JSON.stringify(parm2),
+                        success:function(resp){
+                            console.log(resp)
+                        }
+                    })
+                })
+            },
+            format:function(timestamp){
+                //时间戳转换年月日
+                function add0(m){return m<10?'0'+m:m }
+                //timestamp是整数，否则要parseInt转换,不会出现少个0的情况
+                if(timestamp){
+                    var time = new Date(timestamp);
+                    var year = time.getFullYear();
+                    var month = time.getMonth()+1;
+                    var date = time.getDate();
+                    var hours = time.getHours();
+                    var minutes = time.getMinutes();
+                    var seconds = time.getSeconds();
+                    return year+'-'+add0(month)+'-'+add0(date)+' '+add0(hours)+':'+add0(minutes)+':'+add0(seconds);
+                }else{
+                    return '';
+                }
+
+            }
+        };
+
+        schoolList.init();
+    })
+</script>
+</body>
+
+</html>

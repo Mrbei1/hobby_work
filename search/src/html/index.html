@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>search</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="../../plugin/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../plugin/icon/iconfont.css">
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="../../plugin/bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+<div id="index-box">
+    <!--菜单------ start -->
+    <div class="menu-nav">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="menuDiv" role="navigation">
+                    <ul class="nav nav-list nav-first">
+                        <li>
+                            <a href="#">
+                                <span class=" iconfont icon-zhuye" aria-hidden="true"></span>
+                                <span class="icon-right iconfont icon-xia"></span>
+                                <span>查询</span>
+                            </a>
+                            <ul class="nav nav-list nav-child">
+                                <li><a href="index.html"><span class=" iconfont icon-zhuye" aria-hidden="true"></span><span>志愿查询</span></a></li>
+                                <li><a href="addEnrollment.html"><span class=" iconfont icon-zhuye" aria-hidden="true"></span><span>添加志愿</span></a></li>
+                                <li><a href="EnrollmentList.html"><span class=" iconfont icon-zhuye" aria-hidden="true"></span><span>志愿列表</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="login.html">
+                                <span class=" iconfont icon-zhuye" aria-hidden="true"></span>
+                                <span>退出登录</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--菜单------ end -->
+
+    <!--右侧，展示主页    start-->
+        <div id="container-box" class="container">
+            <div class="index-main">
+                <div style="overflow: hidden;border-bottom: 1px solid #dddddd">
+                    <h3 style="font-size:14px;font-family:inherit;font-weight:500;color:#6f7b8a">高级筛选</h3>
+                </div>
+
+                <form class="form-inline">
+                    <div>
+                        <div class="form-group m-r-10 p-t-15">
+                            <label class="form-group">考生所在地:</label>
+                            <div class="form-group">
+                                <select id="select1" style="min-width:169px;width:100%;height:36px !important;">
+                                    <option value="">选择考生所在地</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group m-r-10 p-t-15">
+                            <label class="form-group">考生文理科:</label>
+                            <div class="form-group">
+                                <select id="select2" style="min-width:169px;width:100%;height:36px !important;">
+                                    <option value="">请选择</option>
+                                    <option value="1">文科</option>
+                                    <option value="2">理科</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group m-r-10 p-t-15">
+                            <label class="form-group">参考数据年份:</label>
+                            <div class="form-group">
+                                <select id="select3" style="min-width:169px;width:100%;height:36px !important;">
+                                    <option value="">选择年份</option>
+                                    <option value="1">2009</option>
+                                    <option value="2">2010</option>
+                                    <option value="3">2011</option>
+                                    <option value="4">2012</option>
+                                    <option value="5">2013</option>
+                                    <option value="6">2014</option>
+                                    <option value="7">2015</option>
+                                    <option value="8">2016</option>
+                                    <option value="9">2017</option>
+                                    <option value="10">2018</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group m-r-10 p-t-15">
+                            <label class="form-group">院校所在地:</label>
+                            <div class="form-group">
+                                <select id="select4" style="min-width:169px;width:100%;height:36px !important;">
+                                    <option value="">选择院校所在地</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group m-r-10 p-t-15">
+                            <label class="form-group">学校专业:</label>
+                            <div class="form-group">
+                                <select id="select5" style="min-width:169px;width:100%;height:36px !important;">
+                                    <option value="">选择学校专业</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group m-r-10 p-t-15">
+                            <label class="form-group"></label>
+                            <div class="form-group">
+                                <a href="#" type="button" class="btn btn-success btn-small m-r-10" id="keywords">搜索</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div style="overflow: hidden;margin-top:15px;">
+                    <h3 style="font-size:18px;font-family:inherit;font-weight:500;color:#6f7b8a">查询结果</h3>
+                </div>
+                <table class="table table-bordered table-striped  table-flip-scroll cf text-center" style="border-top:1px solid #ddd">
+                    <thead class="cf">
+                    <tr>
+                    <tr>
+                        <th class="text-center">录取年份</th>
+                        <th class="text-center">学校名称</th>
+                        <th class="text-center">文理科</th>
+                        <th class="text-center">录取最高分</th>
+                        <th class="text-center">录取最低分</th>
+                        <th class="text-center">录取平均分</th>
+                        <th class="text-center">学校简介</th>
+                    </tr>
+                    </tr>
+                    </thead>
+                    <tbody class="showList">
+                    <!--<tr>-->
+                    <!--<td>ALERT</td>-->
+                    <!--<td>Marksdbfasbfhsla</td>-->
+                    <!--<td>Marksdbfasbfhsla</td>-->
+                    <!--<td>Otto</td>-->
+                    <!--<td>Marksdbfasbfhsla</td>-->
+                    <!--</tr>-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--右侧，展示主页    end-->
+</div>
+
+
+
+
+
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<!--<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>-->
+<script src="../../plugin/jquery/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script type="text/javascript" src="../../plugin/bootstrap/js/bootstrap.min.js"></script>
+<!--<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+<script src="../js/menu.js"></script>
+<script>
+    $(function(){
+        var search = {
+            init:function(){
+                this.getMajorList();
+                this.getAddr();
+            },
+            getAddr:function () {
+                var _this = this;
+                $.ajax({
+                    url:'localhost:8088/region/getRegionList',
+                    type:"GET",
+                    data:{},
+                    success:function(resp){
+                        var option = '';
+                        for(var i=0;i<resp.content.length;i++){
+                            option += '<option value="'+resp.content[i].id+'">'+resp.content[i].name+'</option>'
+                        }
+                        $('#select4').append(option);
+                        $('#select1').append(option);
+                        _this.getsleMsg()
+                    }
+                })
+            },
+            getMajorList:function(){
+                $.ajax({
+                    url:'localhost:8088/major/getMajorList',
+                    type:"GET",
+                    success:function (resp) {
+                        //console.log(resp.content);
+                        var option = '';
+                        for(var i=0;i<resp.content.length;i++){
+                            option += '<option value="'+resp.content[i].id+'">'+resp.content[i].majorName+'</option>'
+                        }
+                        $('#select5').append(option);
+                    }
+                })
+            },
+            getsleMsg:function(){
+                $('#keywords').on('click',function(){
+                    var studentRegion = $('#select1 option:selected') .val();
+                    var type = $('#select2 option:selected') .val();
+                    var year = $('#select3 option:selected') .text();
+                    //var universityId = $('#select4 option:selected') .val();
+                    var majorId = $('#select5 option:selected') .val();
+                    if(studentRegion != '' && type != '' && year !==''){
+                        var msg = {
+                            studentRegion:studentRegion,
+                            type:type,
+                            year:year,
+                            majorId:majorId,
+                        }
+                        $.ajax({
+                            url:'localhost:8088/enrollment/search',
+                            type:"GET",
+                            data:msg,
+                            success:function (resp) {
+                                console.log(resp.content);
+                                var html = '';
+                                for(var i=0;i<resp.content.length;i++){
+                                    html += '<tr>\n' +
+                                        '<td>'+resp.content[i].year+'</td>\n' +
+                                        '<td><a href="javascript:;" class="Detail" data-id="'+resp.content[i].universityId+'">'+resp.content[i].universityName+'</a></td>\n' +
+                                        '<td>'+wenli(type)+'</td>\n' +
+                                        '<td>'+resp.content[i].maxScore+'</td>\n' +
+                                        '<td>'+resp.content[i].minScore+'</td>\n' +
+                                        '<td>'+resp.content[i].avgScore+'</td>\n' +
+                                        '<td><div style="width: 150px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">'+resp.content[i].briefDesc+'</div></td>\n' +
+                                        '</tr>'
+                                }
+                                $('.showList').append(html);
+                                $('.Detail').click(function () {
+                                    console.log($(this).data("id"))
+                                    localStorage.setItem('DetailId',$(this).data("id"))
+                                    window.location.href= 'UniversityDetail.html'
+
+                                })
+                            }
+                        })
+                    }else{
+                        alert('考生所在地、考生文理科、参考数据年份三项为必填项！')
+                        return false;
+                    }
+                })
+                function wenli(type){
+                    if(type ==1){
+                        return "文科"
+                    }else if(type ==2){
+                        return "理科"
+                    }else{
+                        return ""
+                    }
+                }
+            }
+        }
+        search.init();
+    })
+</script>
+</body>
+
+</html>

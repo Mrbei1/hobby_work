@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>storehouse</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="../plugin/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugin/icon/iconfont.css">
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="../plugin/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../plugin/bootstrap-3.3.7-dist/css/datepicker.min.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+<div id="index-box">
+    <!--菜单------ start -->
+    <div class="menu-nav">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="menuDiv" role="navigation">
+                    <ul class="nav nav-list nav-first">
+                        <li><a href="index.html"><span class=" iconfont icon-cangku" aria-hidden="true"></span><span>仓库查询</span></a></li>
+                        <li><a href="Inlog.html"><span class=" iconfont icon-chuli" aria-hidden="true"></span><span>入库记录</span></a></li>
+                        <li><a href="Outlog.html"><span class=" iconfont icon-chuli" aria-hidden="true"></span><span>出库记录</span></a></li>
+                        <li><a href="login.html"><span class="iconfont icon-tuichudenglu1" aria-hidden="true"></span><span>退出登录</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--菜单------ end -->
+
+    <!--右侧，展示主页    start-->
+        <div id="container-box" class="container">
+            <div class="index-main">
+                <div style="overflow: hidden;border-bottom: 1px solid #dddddd">
+                    <h3 style="font-family:inherit;font-weight:500;color:#6f7b8a">仓库查询</h3>
+                </div>
+
+                <form class="form-inline">
+                    <div>
+                        <!--<div class="form-group m-r-10 p-t-15">-->
+                            <!--<label class="form-group">仓位编号</label>-->
+                            <!--<div class="form-group">-->
+                                <!--<input type="text" class="form-control" id="boxNum" name="boxNum" placeholder="请输仓位编号">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group m-r-10 p-t-15">
+                            <label class="form-group">仓位状态:</label>
+                            <div class="form-group">
+                                <select id="boxStatus" style="min-width:169px;width:100%;height:36px !important;">
+                                    <option value="">选择仓位状态</option>
+                                    <option value="0">空闲</option>
+                                    <option value="1">使用中</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group m-r-10 p-t-15">
+                            <label class="form-group">货架层:</label>
+                            <div class="form-group">
+                                <select id="shelfFloor" style="min-width:169px;width:100%;height:36px !important;">
+                                    <option value="">请选择</option>
+                                    <option value="1">1层</option>
+                                    <option value="2">2层</option>
+                                    <option value="=3">3层</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group m-r-10 p-t-15">
+                            <label class="form-group">货架编号:</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="shelfNum" name="shelfNum" placeholder="请输入货架编号">
+                            </div>
+                        </div>
+                        <!--<div class="form-group m-r-10 p-t-15">-->
+                            <!--<div class="form-group">-->
+                                <!--<label>创建日期：</label>-->
+                                <!--&lt;!&ndash;指定 date标记&ndash;&gt;-->
+                                <!--<div class='input-group date' id='datetimepicker1'>-->
+                                    <!--<input type='text' class="form-control" />-->
+                                    <!--<span class="input-group-addon">-->
+                                        <!--<span class="iconfont icon-rili2"></span>-->
+                                    <!--</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group m-r-10 p-t-15">
+                            <label class="form-group"></label>
+                            <div class="form-group">
+                                <a href="#" type="button" class="btn btn-success btn-small m-r-10" id="keywords">搜索</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div style="overflow: hidden;margin-top:15px;">
+                    <h3 style="font-size:18px;font-family:inherit;font-weight:500;color:#6f7b8a">查询结果</h3>
+                </div>
+                <table class="table table-bordered table-striped  table-flip-scroll cf text-center" style="border-top:1px solid #ddd">
+                    <thead class="cf">
+                    <tr>
+                    <tr>
+                        <th class="text-center">仓位编号</th>
+                        <th class="text-center">仓位状态</th>
+                        <th class="text-center">创建时间</th>
+                        <th class="text-center">货架层</th>
+                        <th class="text-center">货架编号</th>
+                        <th class="text-center">操作</th>
+                    </tr>
+                    </tr>
+                    </thead>
+                    <tbody class="showList">
+                        <!--<tr>-->
+                            <!--<td>ALERT</td>-->
+                            <!--<td>Marksdbfasbfhsla</td>-->
+                            <!--<td>Marksdbfasbfhsla</td>-->
+                            <!--<td>Otto</td>-->
+                            <!--<td>Marksdbfasbfhsla</td>-->
+                            <!--<td>Otto</td>-->
+                            <!--<td>-->
+                                <!--<div style="min-width: 90px;">-->
+                                    <!--<a href="addStock.html" data-id="'+resp.content[i].id+'" class="btn edit btn-primary btn-xs btn-mini" type="button">入库</a>-->
+                                    <!--<a href="account.html" data-id="'+resp.content[i].id+'" class="del btn btn-danger btn-xs btn-mini" type="button">出库</a>-->
+                                <!--</div>-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--右侧，展示主页    end-->
+</div>
+
+
+
+
+
+<script type="text/javascript" src="../plugin/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../plugin/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../plugin/bootstrap-3.3.7-dist/js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="../plugin/bootstrap-3.3.7-dist/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        // $('#datetimepicker1').datetimepicker({
+        //     format: 'YYYY-MM-DD hh:mm',
+        //     locale: moment.locale('zh-cn')
+        // });
+        var msg = {}
+        $('#keywords').on('click',function(){
+            msg = {
+                boxStatus:$('#boxStatus input').val(),
+                shelfFloor:$('#shelfFloor option:selected') .val(),
+                shelfNum:$('#shelfNum').val(),
+            }
+            getShelfBoxList();
+
+        })
+        getShelfBoxList();
+
+        function getShelfBoxList(){
+            $.ajax({
+                url:'http://39.105.124.108:9999/getShelfBoxList',
+                type:"GET",
+                data:msg,
+                success:function (resp) {
+                    console.log(resp.content.length);
+                    var html = '';
+                    if(resp.content.length>0){
+                        for(var i=0;i<resp.content.length;i++){
+                            html += '<tr>\n' +
+                                '<td>'+resp.content[i].boxNum+'</td>\n' +
+                                '<td>'+status(resp.content[i].boxStatus)+'</a></td>\n' +
+                                '<td>'+format(resp.content[i].createTime)+'</td>\n' +
+                                '<td>'+resp.content[i].shelfFloor+'</td>\n' +
+                                '<td>'+resp.content[i].shelfNum+'</td>\n' +
+                                '<td><div style="min-width: 90px;">\n' +
+                                '<a href="javascript:;" data-id="'+resp.content[i].id+'" class="InStatus'+resp.content[i].boxStatus+' addstock btn edit btn-primary btn-xs btn-mini" type="button">入库</a>\n' +
+                                '<a href="javascript:;" data-id="'+resp.content[i].id+'" class="OutStatus'+resp.content[i].boxStatus+' outstock btn btn-danger btn-xs btn-mini" type="button">出库</a>\n' +
+                                '</div></td>\n' +
+                                '</tr>'
+                        }
+                        $('.showList').html('');
+                        $('.showList').append(html);
+                    }else{
+                        $('.showList').html('<tr><td  colspan="6"style="text-align: center;">数据为空！</td></tr>')
+                    }
+
+                    $('.addstock').click(function () {
+                        console.log($(this).data("id"))
+                        localStorage.setItem('addstockId',$(this).data("id"))
+                        window.location.href= 'addStock.html'
+
+                    })
+                    $('.outstock').click(function () {
+                        console.log($(this).data("id"))
+                        localStorage.setItem('outstockId',$(this).data("id"))
+                        window.location.href= 'account.html'
+
+                    })
+                }
+            })
+        }
+        function notNull(n){
+            if(n){
+                return n;
+            }else{
+                return '';
+            }
+        }
+        function status(n){
+            if(n==1){
+                return '使用中';
+            }else{
+                return '空闲';
+            }
+        }
+        function format(timestamp){
+            //时间戳转换年月日
+            function add0(m){return m<10?'0'+m:m }
+            //timestamp是整数，否则要parseInt转换,不会出现少个0的情况
+            if(timestamp){
+                var time = new Date(timestamp);
+                var year = time.getFullYear();
+                var month = time.getMonth()+1;
+                var date = time.getDate();
+                var hours = time.getHours();
+                var minutes = time.getMinutes();
+                var seconds = time.getSeconds();
+                return year+'-'+add0(month)+'-'+add0(date)+' '+add0(hours)+':'+add0(minutes)+':'+add0(seconds);
+            }else{
+                return '';
+            }
+
+        }
+    })
+</script>
+</body>
+
+</html>
